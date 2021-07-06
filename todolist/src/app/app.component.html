@@ -36,3 +36,26 @@
     </div>
   </div>
 </div>
+<div class="teste">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Título</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of lists">
+        <td>{{list.id}}</td>
+        <td>{{list.title}}</td>
+        <td>
+          <!--<button type="button" class="btn btn-warning btn-sm" (click)="editCar(car)">Editar</button> -->
+          <button type="button" class="btn btn-danger btn-sm ml-1">Deletar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
