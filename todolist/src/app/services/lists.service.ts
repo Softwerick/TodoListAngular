@@ -27,4 +27,8 @@ export class ListsService {
     return this.httpClient.post<Lists>(this.url, JSON.stringify(list), this.httpOptions)  
   }
 
+  deleteList(list: Lists) {
+    return this.httpClient.delete<Lists>(this.url + '/' + list.id, this.httpOptions)
+  }
+
 }

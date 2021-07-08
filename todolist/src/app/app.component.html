@@ -43,6 +43,7 @@
           <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
               {{list.title}}
+              <button type="button" class="btn btn-danger deleteList" (click)="deleteList(list)">X</button>
             </button>
           </h2>
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -68,6 +69,9 @@
   display: flex;
   justify-content: center;
 }
-
+.deleteList{
+  margin-left: 5%;
+  padding: 4px 10px 4px 10px; 
+}
 </style>
 

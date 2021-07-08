@@ -40,13 +40,20 @@ export class AppComponent implements OnInit {
     });
   }
 
+  //Salva uma nova lista e limpa o form, além de buscar novamente todas as listas
   saveList(form: NgForm){
+    //Antes de adicionar o ChangeDetector, o sistema salvava uma lista nova, sem título nenhum
     this.changeRef.detectChanges();
     this.listService.saveList(this.list).subscribe(() => {
       this.cleanForm(form);
     });
   }
 
+  deleteList(list: Lists) {
+    this.listService.deleteList(list).subscribe(() => {
+      this.getLists();
+    });
+  }
 
   cleanForm(form: NgForm) {
     this.getLists();
