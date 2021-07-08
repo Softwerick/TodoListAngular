@@ -23,8 +23,20 @@
 
 
 
-<div class="container">
-  <div class="row">
+<div class="container" style="margin-top: 1%">
+  <form class="row g-3 needs-validation newlist" (ngSubmit)="saveList(f)" #f="ngForm" novalidate>
+    <div class="col-md-4">
+      <label for="validationCustom01" class="form-label">Adicionar Nova Lista</label>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" [(ngModel)]="list.title" #model="ngModel" id="title" name="title" placeholder="Nome da Lista" aria-describedby="button" required>
+        <button type="submit" class="btn btn-primary" id="button">Adicionar</button>
+      </div>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+  </form>
+  <div class="row" style="margin-top: 1%">
     <div class="col" *ngFor="let list of lists">
       <div class="accordion" id="accordionExample">
         <div class="accordion-item">
@@ -37,8 +49,8 @@
             <div class="accordion-body">
               <ul style="list-style: none;" *ngFor="let task of tasks">
                 <li *ngIf="task.listId == list.id">
-                  <input type="checkbox">
-                  <label>{{task.title}}</label>
+                  <input class="form-check-input" style="margin-right: 1%" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label">{{task.title}}</label>
                 </li>
               </ul>
             </div>
@@ -48,4 +60,14 @@
     </div>
   </div>
 </div>
+
+
+
+<style>
+.newlist{
+  display: flex;
+  justify-content: center;
+}
+
+</style>
 

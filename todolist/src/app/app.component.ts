@@ -3,7 +3,8 @@ import { ListsService } from './services/lists.service';
 import { Lists } from './models/lists';
 import { TasksService } from './services/tasks.service';
 import { Tasks } from './models/tasks';
-//import { NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
   task = {} as Tasks;
   tasks: Tasks[];
 
-  constructor(private listService: ListsService, private tasksService: TasksService) {
+  constructor(private listService: ListsService, private tasksService: TasksService, private changeRef: ChangeDetectorRef) {
     this.lists = [];
     this.tasks = [];
   }
@@ -37,5 +38,19 @@ export class AppComponent implements OnInit {
     this.tasksService.getTasks().subscribe((tasks: Tasks[]) => {
       this.tasks = tasks;
     });
+  }
+
+  saveList(form: NgForm){
+    this.changeRef.detectChanges();
+    this.listService.saveList(this.list).subscribe(() => {
+      this.cleanForm(form);
+    });
+  }
+
+
+  cleanForm(form: NgForm) {
+    this.getLists();
+    form.resetForm();
+    this.list = {} as Lists;
   }
 }

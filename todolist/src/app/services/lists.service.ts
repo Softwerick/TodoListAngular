@@ -23,4 +23,8 @@ export class ListsService {
     return this.httpClient.get<Lists>(this.url + '/' + id)
   }
 
+  saveList(list: Lists): Observable<Lists> {
+    return this.httpClient.post<Lists>(this.url, JSON.stringify(list), this.httpOptions)  
+  }
+
 }
