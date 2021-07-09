@@ -19,11 +19,15 @@ export class TasksService {
   getTasks(): Observable<Tasks[]> {
     return this.httpClient.get<Tasks[]>(this.url)
   }
-  getListById(id: number): Observable<Tasks> {
-    return this.httpClient.get<Tasks>(this.url + '/' + id)
+  getTaskById(id: number): Observable<Tasks[]> {
+    return this.httpClient.get<Tasks[]>(this.url + '?listId=' + id)
   }
 
   saveTask(task: Tasks): Observable<Tasks> {
     return this.httpClient.post<Tasks>(this.url, JSON.stringify(task), this.httpOptions)  
+  }
+
+  deleteTask(task: Tasks) {
+    return this.httpClient.delete<Tasks>(this.url + '/' + task.id, this.httpOptions)
   }
 }

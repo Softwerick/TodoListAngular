@@ -13,19 +13,20 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'todolist';
-  teste = "nada";
-  bla = "";
+  listatemporaria = "";
 
   list = {} as Lists;
   lists: Lists[];
   task = {} as Tasks;
   tasks: Tasks[];
   lista: Lists[];
+  tarefa: Tasks[];
 
   constructor(private listService: ListsService, private tasksService: TasksService, private changeRef: ChangeDetectorRef) {
     this.lists = [];
     this.tasks = [];
     this.lista = [];
+    this.tarefa = [];
   }
 
   ngOnInit() {
@@ -53,9 +54,12 @@ export class AppComponent implements OnInit {
     });
   }
 
+  //Para salvar uma task, primeiro eu transformo o valor pego no html para string e coloco ele dentro da variável lista temporaria.
+  //Após isso, utilizo o serviço para pegar a lista que foi selecionada no html. Com a lista em mãos, coloco ela dentro da variável lista para conseguir utilizá-la.
+  //Com isso feito, guardo o id da lista buscada dentro de task e por último, chamo o serviço de salvar a task.
   saveTask(form: NgForm){
-    this.teste = this.task.listId.toString();
-    this.listService.getListByTitle(this.teste).subscribe((list: Lists[]) => {
+    this.listatemporaria = this.task.listId.toString();
+    this.listService.getListByTitle(this.listatemporaria).subscribe((list: Lists[]) => {
       this.lista = list;
       this.task.listId = this.lista[0].id;
       this.tasksService.saveTask(this.task).subscribe(() => {
@@ -65,6 +69,14 @@ export class AppComponent implements OnInit {
   }
 
   deleteList(list: Lists) {
+    this.tasksService.getTaskById(list.id).subscribe((task: Tasks[]) => {
+      this.tarefa = task;
+      for(var i = 0; i < this.tarefa.length; ++i){
+        this.tasksService.deleteTask(this.tarefa[i]).subscribe(() => {
+          this.getTasks();
+        })
+      }
+    })
     this.listService.deleteList(list).subscribe(() => {
       this.getLists();
     });
