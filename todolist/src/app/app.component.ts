@@ -20,10 +20,12 @@ export class AppComponent implements OnInit {
   lists: Lists[];
   task = {} as Tasks;
   tasks: Tasks[];
+  lista: Lists[];
 
   constructor(private listService: ListsService, private tasksService: TasksService, private changeRef: ChangeDetectorRef) {
     this.lists = [];
     this.tasks = [];
+    this.lista = [];
   }
 
   ngOnInit() {
@@ -54,8 +56,8 @@ export class AppComponent implements OnInit {
   saveTask(form: NgForm){
     this.teste = this.task.listId.toString();
     this.listService.getListByTitle(this.teste).subscribe((list: Lists[]) => {
-      this.lists = list;
-      this.task.listId = this.lists[0].id;
+      this.lista = list;
+      this.task.listId = this.lista[0].id;
       this.tasksService.saveTask(this.task).subscribe(() => {
         this.cleanForm(form);
       })
