@@ -13,6 +13,8 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'todolist';
+  teste = "nada";
+  bla = "";
 
   list = {} as Lists;
   lists: Lists[];
@@ -42,11 +44,22 @@ export class AppComponent implements OnInit {
 
   //Salva uma nova lista e limpa o form, além de buscar novamente todas as listas
   saveList(form: NgForm){
-    //Antes de adicionar o ChangeDetector, o sistema salvava uma lista nova, sem título nenhum
+    //Antes de adicionar, o ChangeDetector, o sistema salvava uma lista nova, sem título nenhum
     this.changeRef.detectChanges();
     this.listService.saveList(this.list).subscribe(() => {
       this.cleanForm(form);
     });
+  }
+
+  saveTask(form: NgForm){
+    this.teste = this.task.listId.toString();
+    this.listService.getListByTitle(this.teste).subscribe((list: Lists[]) => {
+      this.lists = list;
+      this.task.listId = this.lists[0].id;
+      this.tasksService.saveTask(this.task).subscribe(() => {
+        this.cleanForm(form);
+      })
+    })    
   }
 
   deleteList(list: Lists) {
@@ -57,7 +70,9 @@ export class AppComponent implements OnInit {
 
   cleanForm(form: NgForm) {
     this.getLists();
+    this.getTasks();
     form.resetForm();
     this.list = {} as Lists;
+    this.task = {} as Tasks;
   }
 }

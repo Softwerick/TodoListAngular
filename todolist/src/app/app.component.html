@@ -35,9 +35,22 @@
         Looks good!
       </div>
     </div>
+    <div class="col-md-4">
+      <form class="teste" (ngSubmit)="saveTask(d)" #d="ngForm">
+        <label for="validationCustom01" class="form-label">Adicionar Nova Tarefa</label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" [(ngModel)]="task.title" #model="ngModel" id="{{list.title}}"  name="title" placeholder="Nova Tarefa" aria-describedby="button" required>
+          <input class="form-control" list="datalistOptions" id="exampleDataList" [(ngModel)]="task.listId" #model="ngModel" name="taskid" placeholder="Type to search...">
+          <datalist id="datalistOptions">
+            <option  *ngFor="let list of lists" value="{{list.title}}">
+          </datalist>
+          <button type="submit" class="btn btn-primary" id="{{list.title}}">Adicionar</button>
+        </div>
+      </form>
+    </div>
   </form>
-  <div class="row" style="margin-top: 1%">
-    <div class="col" *ngFor="let list of lists">
+  <div class="row listas" style="margin-top: 1%">
+    <div class="col-4" *ngFor="let list of lists">
       <div class="accordion" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
@@ -67,11 +80,14 @@
 <style>
 .newlist{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 .deleteList{
   margin-left: 5%;
   padding: 4px 10px 4px 10px; 
+}
+.listas{
+  display: flex;
 }
 </style>
 

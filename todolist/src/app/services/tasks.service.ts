@@ -22,4 +22,8 @@ export class TasksService {
   getListById(id: number): Observable<Tasks> {
     return this.httpClient.get<Tasks>(this.url + '/' + id)
   }
+
+  saveTask(task: Tasks): Observable<Tasks> {
+    return this.httpClient.post<Tasks>(this.url, JSON.stringify(task), this.httpOptions)  
+  }
 }

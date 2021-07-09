@@ -19,8 +19,8 @@ export class ListsService {
   getLists(): Observable<Lists[]> {
     return this.httpClient.get<Lists[]>(this.url)
   }
-  getListById(id: number): Observable<Lists> {
-    return this.httpClient.get<Lists>(this.url + '/' + id)
+  getListByTitle(title: string): Observable<Lists[]> {
+    return this.httpClient.get<Lists[]>(this.url + '?q=' + title)
   }
 
   saveList(list: Lists): Observable<Lists> {
