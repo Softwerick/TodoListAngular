@@ -2,7 +2,7 @@
 Essa é uma To do List feita em Angular, com Bootstrap
 
 
-Para utilizá-la siga os seguintes passos:
+Para utilizá-la siga os seguintes passos: <br>
 Obs: Note que para que o projeto funcione é necessário o Node.js, o Angular e o Json-server estarem instalados na sua máquina.
 
 1. Baixe o projeto deste repositório;
