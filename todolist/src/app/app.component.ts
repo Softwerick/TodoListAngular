@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
   lists: Lists[];
   task = {} as Tasks;
   tasks: Tasks[];
+
+
   lista: Lists[];
   tarefa: Tasks[];
 
@@ -68,6 +70,9 @@ export class AppComponent implements OnInit {
     })    
   }
 
+
+  //Antes de deletar a lista, checo todas as tasks que tem o listId dela. Então, deleto todas as tasks que tenham esse listId
+  //Após deletar as tasks, só então a lista é deletada
   deleteList(list: Lists) {
     this.tasksService.getTaskById(list.id).subscribe((task: Tasks[]) => {
       this.tarefa = task;
@@ -81,6 +86,7 @@ export class AppComponent implements OnInit {
       this.getLists();
     });
   }
+  
 
   cleanForm(form: NgForm) {
     this.getLists();
