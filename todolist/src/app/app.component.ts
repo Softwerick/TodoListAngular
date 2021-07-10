@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   task = {} as Tasks;
   tasks: Tasks[];
 
-
+  // Essas duas variáveis existem para serem uma lista ou uma tarefa temporária, para que eu possa deletar ou salvar corretamente elas
   lista: Lists[];
   tarefa: Tasks[];
 
@@ -44,7 +44,8 @@ export class AppComponent implements OnInit {
 
 
   //Diferentemente de getLists, aqui em getTasks eu tenho que mudar css e propriedades html caso a tarefa já tenha sido marcada como feita
-  //Para isso, toda vez que a página é recarregada ou uma mudança é feita para adicionar uma tarefa, todas as tarefas são checadas para que elas se mantenham com o estilo de "feita"
+  //Para isso, toda vez que a página é recarregada ou uma mudança é feita para adicionar uma tarefa, todas as tarefas são checadas para que elas se mantenham com o estilo de "feita".
+  //Novamente, usei o detectChanges aqui pois o layout estava carregando muito rápido e o CSS não estava mudando.
   getTasks() {
     this.tasksService.getTasks().subscribe((tasks: Tasks[]) => {
       this.tasks = tasks;
@@ -69,15 +70,24 @@ export class AppComponent implements OnInit {
   saveList(form: NgForm){
     //Antes de adicionar, o ChangeDetector, o sistema salvava uma lista nova, sem título nenhum
     this.changeRef.detectChanges();
+    //Verificação padrão para que um título não possa ser adicionado vazio
+    if(this.list.title == null){
+      alert("O título não pode ser vazio!");
+    }else{
     this.listService.saveList(this.list).subscribe(() => {
       this.cleanForm(form);
-    });
+    });}
   }
 
   //Para salvar uma task, primeiro eu transformo o valor pego no html para string e coloco ele dentro da variável lista temporaria.
   //Após isso, utilizo o serviço para pegar a lista que foi selecionada no html. Com a lista em mãos, coloco ela dentro da variável lista para conseguir utilizá-la.
   //Com isso feito, guardo o id da lista buscada dentro de task e por último, chamo o serviço de salvar a task.
   saveTask(form: NgForm){
+    //Verificação padrão para que um título ou um listId não possam ser adicionados vazios
+    if(this.task.listId == null || this.task.title == null){
+      alert("O título ou a lista não podem ser vazios!");
+    }
+    else{
     this.listatemporaria = this.task.listId.toString();
     this.listService.getListByTitle(this.listatemporaria).subscribe((list: Lists[]) => {
       this.lista = list;
@@ -86,7 +96,7 @@ export class AppComponent implements OnInit {
       this.tasksService.saveTask(this.task).subscribe(() => {
         this.cleanForm(form);
       })
-    })    
+    })}   
   }
 
   //Aqui o atributo checked de task é mudado para que possamos saber qual tarefa já foi marcada como feita ou não.
@@ -124,6 +134,7 @@ export class AppComponent implements OnInit {
   }
   
 
+  //Essa função existe para que, quando algo novo for adicionado, os forms sejam resetados, a página seja atualizada e todas as informações novas sejam recebidas
   cleanForm(form: NgForm) {
     this.getLists();
     this.getTasks();
