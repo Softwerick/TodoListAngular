@@ -1,22 +1,48 @@
 {
-    "lists": [{
-        "id": 1,
-        "title": "Mercado"
-    },{
-        "id": 2,
-        "title": "Trabalho"
-    }],
-    "tasks": [{
-        "id": 1,
-        "listId": 1,
-        "title": "Comprar arroz"
-    }, { 
-        "id": 2,
-        "listId": 1,
-        "title": "Comprar feijão"
-    }, { 
-        "id": 3,
-        "listId": 2,
-        "title": "Reunião às 10:00"
-    }]
-  }
+  "lists": [
+    {
+      "id": 1,
+      "title": "Mercado"
+    },
+    {
+      "id": 2,
+      "title": "Trabalho"
+    },
+    {
+      "title": "Tarefas de Casa",
+      "id": 3
+    }
+  ],
+  "tasks": [
+    {
+      "id": 2,
+      "listId": 1,
+      "title": "Comprar feijão",
+      "checked": true
+    },
+    {
+      "id": 3,
+      "listId": 2,
+      "title": "Reunião às 10:00",
+      "checked": true
+    },
+    {
+      "title": "Limpar o banheiro",
+      "listId": 3,
+      "id": 4,
+      "checked": false
+    },
+    {
+      "title": "Cozinhar o almoço",
+      "listId": 3,
+      "checked": true,
+      "id": 9
+    },
+    {
+      "title": "Comprar Carne",
+      "listId": 1,
+      "checked": false,
+      "id": 10
+    }
+  ]
+}
