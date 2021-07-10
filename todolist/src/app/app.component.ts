@@ -115,6 +115,12 @@ export class AppComponent implements OnInit {
       this.getLists();
     });
   }
+
+  deleteTask(task: Tasks){
+    this.tasksService.deleteTask(task).subscribe(() => {
+      this.getTasks();
+    })
+  }
   
 
   cleanForm(form: NgForm) {

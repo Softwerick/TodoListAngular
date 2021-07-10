@@ -28,7 +28,7 @@
     <div class="col-md-4">
       <label for="validationCustom01" class="form-label">Adicionar Nova Lista</label>
       <div class="input-group mb-3">
-        <input type="text" class="form-control" [(ngModel)]="list.title" #model="ngModel" id="title" name="title" placeholder="Nome da Lista" aria-describedby="button" required>
+        <input type="text" class="form-control" [(ngModel)]="list.title" #model="ngModel" id="title" name="title" placeholder="Nome da lista" aria-describedby="button" required>
         <button type="submit" class="btn btn-primary" id="button">Adicionar</button>
       </div>
       <div class="valid-feedback">
@@ -39,8 +39,8 @@
       <form class="teste" (ngSubmit)="saveTask(d)" #d="ngForm">
         <label for="validationCustom01" class="form-label">Adicionar Nova Tarefa</label>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" [(ngModel)]="task.title" #model="ngModel" id="{{list.title}}"  name="title" placeholder="Nova Tarefa" aria-describedby="button" required>
-          <input class="form-control" list="datalistOptions" id="exampleDataList" [(ngModel)]="task.listId" #model="ngModel" name="taskid" placeholder="Type to search...">
+          <input type="text" class="form-control" [(ngModel)]="task.title" #model="ngModel" id="{{list.title}}"  name="title" placeholder="Nome da tarefa" aria-describedby="button" required>
+          <input class="form-control" list="datalistOptions" id="exampleDataList" [(ngModel)]="task.listId" #model="ngModel" name="taskid" placeholder="Digite a lista">
           <datalist id="datalistOptions">
             <option  *ngFor="let list of lists" value="{{list.title}}">
           </datalist>
@@ -65,6 +65,7 @@
                 <li *ngIf="task.listId == list.id">
                   <input class="form-check-input" style="margin-right: 1%" type="checkbox" (click)="taskDone(task)" id="{{'checkbox' + task.id}}">
                   <label class="form-check-label" id="{{'label' + task.id}}">{{task.title}}</label>
+                  <button type="button" class="btn btn-danger deleteList" (click)="deleteTask(task)">X</button>
                 </li>
               </ul>
             </div>
