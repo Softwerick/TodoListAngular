@@ -1,0 +1,28 @@
+.header {
+  background-color: #7952b3;
+  height: 5rem;
+}
+
+.mid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+.end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.row {
+  height: inherit;
+}
+
+img {
+  width: 5rem;
+  height: 5rem;
+}
