@@ -42,6 +42,9 @@ export class AppComponent implements OnInit {
     });
   }
 
+
+  //Diferentemente de getLists, aqui em getTasks eu tenho que mudar css e propriedades html caso a tarefa já tenha sido marcada como feita
+  //Para isso, toda vez que a página é recarregada ou uma mudança é feita para adicionar uma tarefa, todas as tarefas são checadas para que elas se mantenham com o estilo de "feita"
   getTasks() {
     this.tasksService.getTasks().subscribe((tasks: Tasks[]) => {
       this.tasks = tasks;
@@ -86,19 +89,12 @@ export class AppComponent implements OnInit {
     })    
   }
 
-  teste(task: Tasks){
-    console.log(task.id);
+  //Aqui o atributo checked de task é mudado para que possamos saber qual tarefa já foi marcada como feita ou não.
+  //Após isso, é chamado o método updateTask para modificar a tarefa
+  taskDone(task: Tasks){
     task.checked == false ? task.checked = true : task.checked = false;
-    console.log(task.checked);
 
     this.tasksService.updateTask(task).subscribe(() => {
-      const element = document.getElementById("label" + task.id);
-      //if(element!.style.color == 'green'){
-        //element!.style.color = 'black';
-      //}
-      //else{
-        //element!.style.color = 'green';
-      //}
       this.getTasks();
     });
   }
