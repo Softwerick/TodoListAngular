@@ -31,9 +31,6 @@
         <input type="text" class="form-control" [(ngModel)]="list.title" #model="ngModel" id="title" name="title" placeholder="Nome da lista" aria-describedby="button" required>
         <button type="submit" class="btn btn-primary" id="button">Adicionar</button>
       </div>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
     </div>
     <div class="col-md-4">
       <form class="teste" (ngSubmit)="saveTask(d)" #d="ngForm">
@@ -51,15 +48,15 @@
   </form>
   <div class="row listas" style="margin-top: 1%">
     <div class="col-4" *ngFor="let list of lists">
-      <div class="accordion" id="accordionExample">
+      <div class="accordion" id="{{'accordion' + list.id}}">
         <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <h2 class="accordion-header" id="{{'heading' + list.id}}">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" attr.data-bs-target="#{{'collapse' + list.id}}" aria-expanded="true" attr.aria-controls="{{'collapse' + list.id}}">
               {{list.title}}
               <button type="button" class="btn btn-danger deleteList" (click)="deleteList(list)">X</button>
             </button>
           </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div id="{{'collapse' + list.id}}" class="accordion-collapse collapse show" attr.aria-labelledby="{{'heading' + list.id}}" attr.data-bs-parent="#{{'accordion' + list.id}}">
             <div class="accordion-body">
               <ul style="list-style: none;" *ngFor="let task of tasks;">
                 <li *ngIf="task.listId == list.id">

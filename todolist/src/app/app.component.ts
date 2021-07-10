@@ -113,6 +113,7 @@ export class AppComponent implements OnInit {
     })
     this.listService.deleteList(list).subscribe(() => {
       this.getLists();
+      this.getTasks();
     });
   }
 
