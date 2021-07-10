@@ -33,7 +33,7 @@
           <h2 class="accordion-header" id="{{'heading' + list.id}}">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" attr.data-bs-target="#{{'collapse' + list.id}}" aria-expanded="true" attr.aria-controls="{{'collapse' + list.id}}">
               {{list.title}}
-              <button type="button" class="btn btn-danger deleteList" (click)="deleteList(list)">X</button>
+              <button type="button" class="btn-close deleteList" (click)="deleteList(list)"></button>
             </button>
           </h2>
           <div id="{{'collapse' + list.id}}" class="accordion-collapse collapse show" attr.aria-labelledby="{{'heading' + list.id}}" attr.data-bs-parent="#{{'accordion' + list.id}}">
@@ -42,7 +42,7 @@
                 <li *ngIf="task.listId == list.id">
                   <input class="form-check-input" style="margin-right: 1%" type="checkbox" (click)="taskDone(task)" id="{{'checkbox' + task.id}}">
                   <label class="form-check-label" id="{{'label' + task.id}}">{{task.title}}</label>
-                  <button type="button" class="btn btn-danger deleteList" (click)="deleteTask(task)">X</button>
+                  <button type="button" class="btn-close deleteList" (click)="deleteTask(task)"></button>
                 </li>
               </ul>
             </div>
