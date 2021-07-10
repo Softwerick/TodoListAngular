@@ -41,9 +41,24 @@ export class AppComponent implements OnInit {
       this.lists = lists;
     });
   }
+
   getTasks() {
     this.tasksService.getTasks().subscribe((tasks: Tasks[]) => {
       this.tasks = tasks;
+      this.changeRef.detectChanges();
+
+      for(var i = 0; i < this.tasks.length; ++i){
+        const label = document.getElementById("label" + tasks[i].id);
+        const checkbox = document.getElementById("checkbox" + tasks[i].id);
+
+        if(tasks[i].checked == true){
+          label!.style.color = 'green';
+          checkbox!.setAttribute("checked", "checked");
+        }
+        else{
+          label!.style.color = 'black';
+        }
+      }
     });
   }
 
@@ -64,10 +79,28 @@ export class AppComponent implements OnInit {
     this.listService.getListByTitle(this.listatemporaria).subscribe((list: Lists[]) => {
       this.lista = list;
       this.task.listId = this.lista[0].id;
+      this.task.checked = false;
       this.tasksService.saveTask(this.task).subscribe(() => {
         this.cleanForm(form);
       })
     })    
+  }
+
+  teste(task: Tasks){
+    console.log(task.id);
+    task.checked == false ? task.checked = true : task.checked = false;
+    console.log(task.checked);
+
+    this.tasksService.updateTask(task).subscribe(() => {
+      const element = document.getElementById("label" + task.id);
+      //if(element!.style.color == 'green'){
+        //element!.style.color = 'black';
+      //}
+      //else{
+        //element!.style.color = 'green';
+      //}
+      this.getTasks();
+    });
   }
 
 

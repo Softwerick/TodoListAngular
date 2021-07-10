@@ -61,10 +61,10 @@
           </h2>
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              <ul style="list-style: none;" *ngFor="let task of tasks">
+              <ul style="list-style: none;" *ngFor="let task of tasks;">
                 <li *ngIf="task.listId == list.id">
-                  <input class="form-check-input" style="margin-right: 1%" type="checkbox" value="" id="flexCheckDefault">
-                  <label class="form-check-label">{{task.title}}</label>
+                  <input class="form-check-input" style="margin-right: 1%" type="checkbox" (click)="teste(task)" id="{{'checkbox' + task.id}}">
+                  <label class="form-check-label" id="{{'label' + task.id}}">{{task.title}}</label>
                 </li>
               </ul>
             </div>
@@ -85,9 +85,6 @@
 .deleteList{
   margin-left: 5%;
   padding: 4px 10px 4px 10px; 
-}
-.listas{
-  margin-top: 5%;
 }
 </style>
 
